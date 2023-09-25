@@ -8,7 +8,6 @@ x = BGI_WIDTH//2
 y = BGI_HEIGHT//2
 dir_x = 0
 dir_y = 0
-open_canvas(BGI_WIDTH, BGI_HEIGHT)
 running = True
 standing_sprite_x = [0, 185, 369, 557, 743, 929, 1119, 1308]
 running_sprite_x = [0, 197, 395, 617, 809, 1003]
@@ -17,11 +16,14 @@ monster_height = 100
 standing_frame = 0
 running_frame = 0
 
-# 리소스 파일
+# 캔버스 열기
+open_canvas(BGI_WIDTH, BGI_HEIGHT)
+
+# 리소스 파일 불러오기
 tuk_ground = load_image('TUK_GROUND.png')
 monster = load_image('tauromacis.png')
 
-# 함수 선언
+# 이벤트 발생 확인 함수 선언
 def handle_events():
     global running, dir_x, dir_y
 
@@ -54,14 +56,17 @@ def handle_events():
 while running:
     clear_canvas()
     tuk_ground.draw(BGI_WIDTH//2, BGI_HEIGHT//2)
+    # x축 바깥 화면으로 나가지 못함
     if (x < monster_width//2):
         x = monster_width//2
     elif (x > BGI_WIDTH - monster_width//2):
         x = BGI_WIDTH - monster_width//2
+    # y축 바깥 화면으로 나가지 못함
     if (y < monster_height//2):
         y = monster_height//2
     elif (y > BGI_HEIGHT - monster_height//2):
         y = BGI_HEIGHT - monster_height//2
+    # 멈춤/움직임 스프라이트 구분
     if (dir_x == 0) & (dir_y == 0):
         monster.clip_draw(standing_sprite_x[standing_frame], 1104-120, 186, 120, x, y, monster_width, monster_height)
     else:
@@ -74,4 +79,5 @@ while running:
     y += dir_y * 10
     delay(0.05)
 
+# 캔버스 닫기
 close_canvas()
