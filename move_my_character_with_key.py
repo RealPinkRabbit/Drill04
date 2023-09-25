@@ -18,7 +18,8 @@ def handle_events():
             running = False
 
 running = True
-standing_sprites_x = [0, 185, 369, 557, 743, 929, 1119, 1308]
+standing_sprite_x = [0, 185, 369, 557, 743, 929, 1119, 1308]
+running_sprite_x = [0, 197, 395, 617, 809, 1003]
 standing_frame = 0
 running_frame = 0
 
@@ -26,7 +27,8 @@ running_frame = 0
 while running:
     clear_canvas()
     tuk_ground.draw(BGI_WIDTH//2, BGI_HEIGHT//2)
-    monster.clip_draw(standing_sprites_x[standing_frame], 1104-120, 186, 120, 400, 300)
+#    monster.clip_draw(standing_sprite_x[standing_frame], 1104-120, 186, 120, 400, 300)
+    monster.clip_draw(running_sprite_x[running_frame], 1104-280, 193, 120, 400, 300)
     
     update_canvas()
     handle_events()
