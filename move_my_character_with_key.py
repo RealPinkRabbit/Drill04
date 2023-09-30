@@ -55,6 +55,9 @@ def handle_events():
 # 메인함수
 while running:
     clear_canvas()
+    handle_events()
+    x += dir_x * 10
+    y += dir_y * 10
     tuk_ground.draw(BGI_WIDTH//2, BGI_HEIGHT//2)
     # x축 바깥 화면으로 나가지 못함
     if (x < monster_width//2):
@@ -72,11 +75,8 @@ while running:
     else:
         monster.clip_draw(running_sprite_x[running_frame], 1104-280, 193, 120, x, y, monster_width, monster_height)
     update_canvas()
-    handle_events()
     standing_frame = (standing_frame + 1) % 8
     running_frame = (running_frame + 1) % 6
-    x += dir_x * 10
-    y += dir_y * 10
     delay(0.05)
 
 # 캔버스 닫기
